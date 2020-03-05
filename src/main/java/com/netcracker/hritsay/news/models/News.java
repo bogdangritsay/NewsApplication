@@ -1,6 +1,5 @@
 package com.netcracker.hritsay.news.models;
 
-import jdk.net.SocketFlow;
 
 import java.util.ArrayList;
 
@@ -37,5 +36,14 @@ public class News {
 
     public void setArticles(ArrayList<Article> articles) {
         this.articles = articles;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "status='" + status + '\'' +
+                ", results=" + results +
+                ", articles=" + articles.toString() +
+                '}';
     }
 }

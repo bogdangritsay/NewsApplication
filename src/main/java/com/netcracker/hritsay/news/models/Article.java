@@ -1,6 +1,6 @@
 package com.netcracker.hritsay.news.models;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Article {
     private Source source;
@@ -9,10 +9,10 @@ public class Article {
     private String description;
     private String url;
     private String urlToImage;
-    private LocalDateTime date;
+    private ZonedDateTime date;
     private String content;
 
-    public Article(Source source, String author, String title, String description, String url, String urlToImage, LocalDateTime date, String content) {
+    public Article(Source source, String author, String title, String description, String url, String urlToImage, ZonedDateTime date, String content) {
         this.source = source;
         this.author = author;
         this.title = title;
@@ -71,11 +71,11 @@ public class Article {
         this.urlToImage = urlToImage;
     }
 
-    public LocalDateTime getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 
@@ -85,5 +85,19 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+               // "source=" + source.toString() +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", urlToImage='" + urlToImage + '\'' +
+                ", date=" + date +
+                ", content='" + content + '\'' +
+                '}' + "\n";
     }
 }
