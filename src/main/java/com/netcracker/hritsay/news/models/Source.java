@@ -1,5 +1,8 @@
 package com.netcracker.hritsay.news.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Source {
     private String id;
     private String name;

@@ -1,25 +1,20 @@
 package com.netcracker.hritsay.news.models;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
+@Component
 public class News {
-    private String status;
     private int results;
     ArrayList<Article> articles;
 
+    @Autowired
     public News(String status, int results, ArrayList<Article> articles) {
-        this.status = status;
         this.results = results;
         this.articles = articles;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getResults() {
@@ -41,8 +36,7 @@ public class News {
     @Override
     public String toString() {
         return "News{" +
-                "status='" + status + '\'' +
-                ", results=" + results +
+                "results=" + results +
                 ", articles=" + articles.toString() +
                 '}';
     }

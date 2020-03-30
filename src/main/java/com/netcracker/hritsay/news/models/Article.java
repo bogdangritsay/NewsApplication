@@ -1,7 +1,11 @@
 package com.netcracker.hritsay.news.models;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.time.ZonedDateTime;
 
+@Component
 public class Article {
     private Source source;
     private String author;
@@ -12,6 +16,7 @@ public class Article {
     private ZonedDateTime date;
     private String content;
 
+    @Autowired
     public Article(Source source, String author, String title, String description, String url, String urlToImage, ZonedDateTime date, String content) {
         this.source = source;
         this.author = author;
