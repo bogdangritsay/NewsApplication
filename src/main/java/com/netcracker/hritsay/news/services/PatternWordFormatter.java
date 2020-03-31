@@ -1,4 +1,4 @@
-package com.netcracker.hritsay.news.controllers;
+package com.netcracker.hritsay.news.services;
 
 
 import com.netcracker.hritsay.news.models.Article;

@@ -1,7 +1,8 @@
 package com.netcracker.hritsay.news.services;
 
 import com.netcracker.hritsay.news.controllers.NewsFromJSONConverter;
-import com.netcracker.hritsay.news.controllers.PatternWordFormatter;
+import com.netcracker.hritsay.news.services.NewsService;
+import com.netcracker.hritsay.news.services.PatternWordFormatter;
 import com.netcracker.hritsay.news.models.News;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.net.URL;
 
 @Service
 @Qualifier("news")
-public class NEWSAPINewsService implements NewsService{
+public class NEWSAPINewsService implements NewsService {
     public NEWSAPINewsService() {}
     @Override
     public String getResponseNews() {
