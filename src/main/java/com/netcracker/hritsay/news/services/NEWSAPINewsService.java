@@ -1,9 +1,6 @@
 package com.netcracker.hritsay.news.services;
 
-import com.netcracker.hritsay.news.controllers.NewsFromJSONConverter;
-import com.netcracker.hritsay.news.services.NewsService;
-import com.netcracker.hritsay.news.services.PatternWordFormatter;
-import com.netcracker.hritsay.news.models.News;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -55,9 +52,4 @@ public class NEWSAPINewsService implements NewsService {
         return  null;
     }
 
-    public void createWordDocument(String content) {
-        News news = NewsFromJSONConverter.parseNews(content);
-        PatternWordFormatter patternWordFormatter = new PatternWordFormatter();
-        patternWordFormatter.formatAll(news);
-    }
 }
