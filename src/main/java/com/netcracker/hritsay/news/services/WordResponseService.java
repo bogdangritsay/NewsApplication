@@ -7,7 +7,7 @@ public class WordResponseService {
     public void createWordDocument(String content) {
         News news = NewsFromJSONConverter.parseNews(content);
         PatternWordFormatter patternWordFormatter = new PatternWordFormatter();
-        patternWordFormatter.formatAll(news);
+        patternWordFormatter.writeInDoc(news);
     }
 
 }

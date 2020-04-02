@@ -24,7 +24,7 @@ public class XMLController implements DataResponseController {
          */
         News news = NewsFromJSONConverter.parseNews(responseNews);
         XMLResponseService jsonService = new XMLResponseService();
-        String data = " Empty set";
+        String data =  jsonService.getData(news);
         return new ResponseEntity<>(data, HttpStatus.OK);
 }
 }

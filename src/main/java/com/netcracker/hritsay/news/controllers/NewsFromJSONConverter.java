@@ -18,9 +18,8 @@ public class NewsFromJSONConverter {
         JSONArray arr = newsJson.getJSONArray("articles");
         for (int i = 0; i < arr.length(); i++) {
             Object idObj = arr.getJSONObject(i).getJSONObject("source").get("id");
-            String id = (!JSONObject.NULL.equals(idObj))? (String) idObj: null;
             String name = arr.getJSONObject(i).getJSONObject("source").getString("name");
-            Source source = new Source(id, name);
+            String source = name;
             Object authObj = arr.getJSONObject(i).get("author");
             String author= (!JSONObject.NULL.equals(authObj))? (String) authObj: null;
             String title = arr.getJSONObject(i).getString("title");

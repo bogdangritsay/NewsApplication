@@ -20,18 +20,23 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class PatternWordFormatter {
-    private String output = "news.docx";
+
     private XWPFDocument document = new XWPFDocument();
 
 
-    public void formatAll(News news) {
-        ArrayList<Article> articles = news.getArticles();
-        for (Article article : articles) {
-            format(article);
-        }
+    public void writeInDoc(News news) {
         try {
+            Properties property = new Properties();
+            FileInputStream fis;
+            fis = new FileInputStream("src/main/resources/application.properties");
+            property.load(fis);
+
+            String output = property.getProperty("word.path");
+
+            formatAll(news);
             FileOutputStream out = new FileOutputStream(output);
             document.write(out);
             out.close();
@@ -41,7 +46,14 @@ public class PatternWordFormatter {
         }
     }
 
-    public void format(Article article) {
+    private void formatAll(News news) {
+        ArrayList<Article> articles = news.getArticles();
+        for (Article article : articles) {
+            format(article);
+        }
+    }
+
+    private void format(Article article) {
         XWPFParagraph titleNew = document.createParagraph();
         titleNew.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun titleRun = titleNew.createRun();
