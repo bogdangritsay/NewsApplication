@@ -4,14 +4,18 @@ package com.netcracker.hritsay.news.models;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
+
 @Component
+@XmlRootElement
 public class News {
     private int results;
     ArrayList<Article> articles;
 
-    @Autowired
+    public News() {}
+
     public News(String status, int results, ArrayList<Article> articles) {
         this.results = results;
         this.articles = articles;
