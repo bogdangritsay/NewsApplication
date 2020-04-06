@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/data")
-public class WordController implements DataResponseController {
+public class WordController {
     com.netcracker.hritsay.news.services.NEWSAPINewsService NEWSAPINewsService = new NEWSAPINewsService();
     com.netcracker.hritsay.news.services.WordResponseService wordResponseService = new WordResponseService();
 

@@ -2,7 +2,6 @@ package com.netcracker.hritsay.news.controllers;
 
 import com.netcracker.hritsay.news.models.Article;
 import com.netcracker.hritsay.news.models.News;
-import com.netcracker.hritsay.news.models.Source;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.time.ZonedDateTime;

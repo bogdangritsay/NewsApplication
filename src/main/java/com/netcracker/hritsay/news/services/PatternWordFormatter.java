@@ -75,12 +75,14 @@ public class PatternWordFormatter {
             BufferedImage img = ImageIO.read(connection.getInputStream());
             String pathTmpImage = "\\downloaded.jpg";
             File file = new File(pathTmpImage);
-            ImageIO.write(img, "jpg", file);
-            if (article.getUrlToImage() != null ) {
-                InputStream is = new FileInputStream(file);
-                imageRun.addPicture(is,
-                        XWPFDocument.PICTURE_TYPE_JPEG, file.getName(),
-                        Units.toEMU(400), Units.toEMU(250));
+            if(img != null) {
+                ImageIO.write(img, "jpg", file);
+                if (article.getUrlToImage() != null) {
+                    InputStream is = new FileInputStream(file);
+                    imageRun.addPicture(is,
+                            XWPFDocument.PICTURE_TYPE_JPEG, file.getName(),
+                            Units.toEMU(400), Units.toEMU(250));
+                }
             }
         } catch (InvalidFormatException | IOException e) {
             e.printStackTrace();
