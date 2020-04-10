@@ -10,6 +10,8 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
 import javax.imageio.ImageIO;
@@ -20,22 +22,13 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class PatternWordFormatter {
 
     private XWPFDocument document = new XWPFDocument();
 
-
-    public void writeInDoc(News news) {
+    public void writeInDoc(News news, String output) {
         try {
-            Properties property = new Properties();
-            FileInputStream fis;
-            fis = new FileInputStream("src/main/resources/application.properties");
-            property.load(fis);
-
-            String output = property.getProperty("word.path");
-
             formatAll(news);
             FileOutputStream out = new FileOutputStream(output);
             document.write(out);
