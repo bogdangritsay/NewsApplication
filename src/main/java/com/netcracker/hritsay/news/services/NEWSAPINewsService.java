@@ -1,7 +1,11 @@
 package com.netcracker.hritsay.news.services;
 
 
+import com.netcracker.hritsay.news.controllers.WordController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -13,10 +17,13 @@ import java.net.URL;
 @Service
 @Qualifier("news")
 public class NEWSAPINewsService implements NewsService {
-    public NEWSAPINewsService() {}
+    @Value("${newsapi.url.ua.ua}")
+    private String url;
+    private static final Logger logger = LogManager.getLogger(NEWSAPINewsService.class);
+
+
     @Override
     public String getResponseNews() {
-        String url = "https://newsapi.org/v2/top-headlines?country=ua&apiKey=ba0b13a40fc94543a6ce6009633ec0d8";
         HttpURLConnection connection = null;
         try {
             connection = (HttpURLConnection) new URL(url).openConnection();
@@ -34,19 +41,19 @@ public class NEWSAPINewsService implements NewsService {
                 while((result = in.readLine()) != null) {
                    sb.append(result);
                 }
-                System.out.println(sb.toString());
+                logger.info("Connection-status: OK");
                 return sb.toString();
             } else {
-                System.out.println("Fail: " + connection.getResponseCode() + ", " + connection.getResponseMessage());
+                logger.error("Fail: " + connection.getResponseCode() + ", " + connection.getResponseMessage());
                 return null;
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
-            //there is logs
+            logger.error("I/OException");
         } finally {
             if (connection != null) {
                 connection.disconnect();
+                logger.info("Connection was been closed.");
             }
         }
         return  null;
