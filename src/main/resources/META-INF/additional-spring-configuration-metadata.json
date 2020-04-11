@@ -1,8 +1,13 @@
 {
   "properties": [
     {
+      "name": "newsapi.url.ua.ua",
+      "type": "java.lang.String",
+      "description": "Description for newsapi.url.ua.ua."
+    },
+    {
       "name": "word.path",
       "type": "java.lang.String",
       "description": "Description for word.path."
-  }
-] }
+    }
+  ] }

@@ -1,7 +1,10 @@
 package com.netcracker.hritsay.news.controllers;
 
 
+import com.netcracker.hritsay.news.services.NEWSAPINewsService;
 import org.apache.commons.compress.utils.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +28,8 @@ public class WordController {
     @Value("${word.path}")
     private String docFile;
 
+    private static final Logger logger = LogManager.getLogger(WordController.class);
+
 
     @RequestMapping(path = "/word", method = RequestMethod.GET)
     public ResponseEntity<?> showData() throws IOException {
@@ -38,7 +43,6 @@ public class WordController {
     File result = new File(docFile);
     if(result.exists()){
         InputStream inputStream = new FileInputStream(docFile);
-        //String type = result.toURL().openConnection().guessContentTypeFromName(docFile);
 
         byte[]out= IOUtils.toByteArray(inputStream);
 
@@ -46,8 +50,10 @@ public class WordController {
         responseHeaders.add("content-disposition", "attachment; filename=" + docFile);
         //responseHeaders.add("Content-Type", "docx");
 
+        logger.info("Result exist. Response the file.");
         respEntity = new ResponseEntity(out, responseHeaders,HttpStatus.OK);
-    }else{
+    } else {
+        logger.warn("File not found.");
         respEntity = new ResponseEntity ("File Not Found", HttpStatus.OK);
     }
     return respEntity;

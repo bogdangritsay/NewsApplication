@@ -1,31 +1,31 @@
 package com.netcracker.hritsay.news.services;
 
 
+
+import com.netcracker.hritsay.news.controllers.WordController;
 import com.netcracker.hritsay.news.models.Article;
 import com.netcracker.hritsay.news.models.News;
+import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-
 import java.net.URL;
 import java.net.URLConnection;
 
 import java.util.ArrayList;
 
+@Component
 public class PatternWordFormatter {
-
     private XWPFDocument document = new XWPFDocument();
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PatternWordFormatter.class);
 
     public void writeInDoc(News news, String output) {
         try {
@@ -35,7 +35,7 @@ public class PatternWordFormatter {
             out.close();
             document.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("I/OE exception. Can`t write in docx file.");
         }
     }
 
@@ -78,12 +78,9 @@ public class PatternWordFormatter {
                 }
             }
         } catch (InvalidFormatException | IOException e) {
-            e.printStackTrace();
-            System.out.println("Error is there: " + article.getUrlToImage());
+            logger.warn("Error of image format is here: " + article.getUrlToImage());
         }
         imageRun.addBreak();
-
-
         XWPFParagraph authorNew = document.createParagraph();
         XWPFRun authorRun = titleNew.createRun();
         authorRun.setText("Автор новини: " + article.getAuthor());
@@ -111,10 +108,5 @@ public class PatternWordFormatter {
         titleRun.setFontSize(14);
         titleRun.setFontFamily("Calibri");
         urlRun.addBreak();
-
-
-
-
-
     }
 }
