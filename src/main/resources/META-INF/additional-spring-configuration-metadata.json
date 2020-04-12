@@ -9,5 +9,20 @@
       "name": "word.path",
       "type": "java.lang.String",
       "description": "Description for word.path."
+    },
+    {
+      "name": "newsapi.key",
+      "type": "java.lang.String",
+      "description": "Description for newsapi.key."
+    },
+    {
+      "name": "newsapi.url",
+      "type": "java.lang.String",
+      "description": "Description for newsapi.url."
+    },
+    {
+      "name": "word.path.template",
+      "type": "java.lang.String",
+      "description": "Description for word.path.template."
     }
   ] }

@@ -19,14 +19,17 @@ import java.net.URL;
 public class NEWSAPINewsService implements NewsService {
     @Value("${newsapi.url.ua.ua}")
     private String url;
+    @Value("${newsapi.key}")
+    private String key;
     private static final Logger logger = LogManager.getLogger(NEWSAPINewsService.class);
 
 
     @Override
     public String getResponseNews() {
         HttpURLConnection connection = null;
+        String allUrl = url + key;
         try {
-            connection = (HttpURLConnection) new URL(url).openConnection();
+            connection = (HttpURLConnection) new URL(allUrl).openConnection();
 
             connection.setRequestMethod("GET");
 

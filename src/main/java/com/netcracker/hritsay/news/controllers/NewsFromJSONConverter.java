@@ -20,9 +20,6 @@ public class NewsFromJSONConverter implements Converter<String, News> {
     public  News convert(String responseNews) {
         ArrayList<Article> parsedArticles = new ArrayList<>();
         JSONObject newsJson = new JSONObject(responseNews);
-        String status = newsJson.getString("status");
-        int totalResults = newsJson.getInt("totalResults");
-
         JSONArray arr = newsJson.getJSONArray("articles");
         for (int i = 0; i < arr.length(); i++) {
             Object idObj = arr.getJSONObject(i).getJSONObject("source").get("id");
@@ -42,6 +39,6 @@ public class NewsFromJSONConverter implements Converter<String, News> {
             parsedArticles.add(new Article(source, author, title, description, url, urlToImage, date, content));
         }
         logger.info("JSON was been converted into News data.");
-        return new News(status, totalResults, parsedArticles);
+        return new News(parsedArticles);
     }
 }

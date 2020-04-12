@@ -1,11 +1,12 @@
 package com.netcracker.hritsay.news.models;
 
+import com.sun.xml.internal.txw2.annotation.XmlElement;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 
 @Component
-
+@XmlElement
 public class Article {
     private String source;
     private String author;
