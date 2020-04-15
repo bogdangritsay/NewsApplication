@@ -8,6 +8,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
@@ -62,6 +63,8 @@ public class WordWriter {
      * @param articles it`s news data
      * @return created XWPFDFile with news data
      */
+
+
     public  XWPFDocument createNewsDocFromTemplate(List<Article> articles) {
         try {
             XWPFDocument documentT = createNTemplateParagraphs(articles.size());

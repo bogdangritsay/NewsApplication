@@ -25,9 +25,10 @@ public class NEWSAPINewsService implements NewsService {
 
 
     @Override
-    public String getResponseNews() {
+    public String getResponseNews(String country, String category) {
         HttpURLConnection connection = null;
-        String allUrl = url + key;
+
+        String allUrl = url + "country=" + country + "&category=" + category +  key;
         try {
             connection = (HttpURLConnection) new URL(allUrl).openConnection();
 

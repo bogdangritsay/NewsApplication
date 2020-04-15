@@ -20,8 +20,7 @@ public class WordResponseService {
     @Autowired
     WordWriter wordWriter;
 
-    public void createWordDocument(String responseNews) {
-        News news = converter.convert(responseNews);
+    public void createWordDocument(News news) {
         if (news != null) {
             XWPFDocument doc = wordWriter.createNewsDocFromTemplate(news.getArticles());
             wordWriter.writeToFile(doc, output);

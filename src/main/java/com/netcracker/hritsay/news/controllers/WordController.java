@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
@@ -30,12 +31,15 @@ public class WordController {
 
     private static final Logger logger = LogManager.getLogger(WordController.class);
 
-
-    @RequestMapping(path = "/word", method = RequestMethod.GET)
-    public ResponseEntity<?> showData() throws IOException {
+/*
+    @RequestMapping(path = "/worvvd", method = RequestMethod.GET)
+    public ResponseEntity<?> showData(
+            @RequestParam(name = "country", defaultValue = "ua") String country,
+            @RequestParam(name = "category", defaultValue = "business") String category
+    ) throws IOException {
 
     ResponseEntity respEntity = null;
-    String responseNews = NEWSAPINewsService.getResponseNews();
+    String responseNews = NEWSAPINewsService.getResponseNews(country, category);
     wordResponseService.createWordDocument(responseNews);
 
     byte[] reportBytes = null;
@@ -57,5 +61,5 @@ public class WordController {
         respEntity = new ResponseEntity ("File Not Found", HttpStatus.OK);
     }
     return respEntity;
-    }
+    }*/
 }
