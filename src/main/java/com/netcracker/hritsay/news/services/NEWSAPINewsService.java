@@ -1,7 +1,5 @@
 package com.netcracker.hritsay.news.services;
 
-
-import com.netcracker.hritsay.news.controllers.WordController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,9 +23,10 @@ public class NEWSAPINewsService implements NewsService {
 
 
     @Override
-    public String getResponseNews() {
+    public String getResponseNews(String country, String category) {
         HttpURLConnection connection = null;
-        String allUrl = url + key;
+
+        String allUrl = url + "country=" + country + "&category=" + category +  key;
         try {
             connection = (HttpURLConnection) new URL(allUrl).openConnection();
 
