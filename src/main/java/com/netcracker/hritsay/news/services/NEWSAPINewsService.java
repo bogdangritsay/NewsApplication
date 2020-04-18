@@ -1,7 +1,5 @@
 package com.netcracker.hritsay.news.services;
 
-
-import com.netcracker.hritsay.news.controllers.WordController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -24,5 +24,10 @@
       "name": "word.path.template",
       "type": "java.lang.String",
       "description": "Description for word.path.template."
+    },
+    {
+      "name": "request.threads",
+      "type": "java.lang.String",
+      "description": "Description for request.threads."
     }
   ] }
