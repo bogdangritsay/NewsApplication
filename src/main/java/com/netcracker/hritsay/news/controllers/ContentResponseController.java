@@ -148,7 +148,7 @@ public class ContentResponseController {
         }
         return news;
     }
-    
+
     private News getNewNews(String response, News news) {
         News tmpNews = converter.convert(response);
         if (news.getArticles() == null) {
