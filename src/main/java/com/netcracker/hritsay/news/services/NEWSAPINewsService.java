@@ -29,21 +29,15 @@ public class NEWSAPINewsService implements NewsService {
     @Cacheable(cacheNames = "newsCache", key="{#country, #category}")
     public String getResponseNews(String country, String category) {
         HttpURLConnection connection = null;
-
         String allUrl = url + "country=" + country + "&category=" + category +  key;
         try {
             connection = (HttpURLConnection) new URL(allUrl).openConnection();
-
             connection.setRequestMethod("GET");
-
             connection.connect();
             StringBuilder sb = new StringBuilder();
-
             if(HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
                 String result;
-
                 while((result = in.readLine()) != null) {
                    sb.append(result);
                 }
@@ -53,7 +47,6 @@ public class NEWSAPINewsService implements NewsService {
                 logger.error("Fail: " + connection.getResponseCode() + ", " + connection.getResponseMessage());
                 return null;
             }
-
         } catch (IOException e) {
             logger.error("I/OException");
         } finally {
@@ -64,5 +57,4 @@ public class NEWSAPINewsService implements NewsService {
         }
         return  null;
     }
-
 }

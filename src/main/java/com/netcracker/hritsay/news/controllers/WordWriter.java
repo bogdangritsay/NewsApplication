@@ -27,48 +27,19 @@ import java.util.List;
 public class WordWriter {
     @Value("${word.path.template}")
     private String TEMPLATE;
-    @Value("${word.path}")
-    private String TMPTEMPLATES;
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(WordWriter.class);
 
-    /**
-     * Method that creates the file with indicated quantity of templates.
-     * @param n it`s quantity of templates
-     * @return created XWPFDFile with templates
-     */
-    private XWPFDocument createNTemplateParagraphs(int n) {
-        XWPFDocument doc = null;
-        try {
-            doc = new XWPFDocument(new FileInputStream(TEMPLATE));
-
-            XWPFParagraph templateParagraph = doc.getParagraphs().get(0);
-
-           while(doc.getParagraphs().size() != n) {
-               doc.createParagraph();
-           }
-           int position = 0;
-            int s = doc.getParagraphs().size();
-            for(XWPFParagraph paragraph : doc.getParagraphs()) {
-                doc.setParagraph(templateParagraph, position++);
-            }
-        } catch (IOException e) {
-            logger.error("File " + TEMPLATE + "was not been found!");
-        }
-        return doc;
-    }
 
     /**
      * Method that creates the file with news data
      * @param articles it`s news data
      * @return created XWPFDFile with news data
      */
-
-
     public  XWPFDocument createNewsDocFromTemplate(List<Article> articles) {
         try {
             XWPFDocument documentT = createNTemplateParagraphs(articles.size());
-            writeToFile(documentT, TMPTEMPLATES);
-            XWPFDocument document = new XWPFDocument(new FileInputStream(TMPTEMPLATES));
+            InputStream is = writeToInputStream(documentT);
+            XWPFDocument document = new XWPFDocument(is);
             List<XWPFParagraph> paragraphList = document.getParagraphs();
             for (int i = 0; i < articles.size(); i++) {
                 XWPFParagraph par = paragraphList.get(i);
@@ -92,25 +63,41 @@ public class WordWriter {
             }
             return document;
         } catch (IOException e) {
-            logger.error("File " + TMPTEMPLATES + " for temporary templates was not been found!");
+            logger.error("InputStream was not been found!");
         }
         return null;
     }
 
-    /**
-     * Method that writes XWPFDocument to the specified path.
-     * @param document it`s XWPFDFile for writing
-     * @param fileName or path for writing
-     */
-    public void writeToFile(XWPFDocument document, String fileName) {
+    private XWPFDocument createNTemplateParagraphs(int n) {
+        XWPFDocument doc = null;
         try {
-            File f = new File(fileName);
-            OutputStream out = new FileOutputStream(f);
-            document.write(out);
+            doc = new XWPFDocument(new FileInputStream(TEMPLATE));
+            XWPFParagraph templateParagraph = doc.getParagraphs().get(0);
+            while(doc.getParagraphs().size() != n) {
+                doc.createParagraph();
+            }
+            int position = 0;
+            int s = doc.getParagraphs().size();
+            for(XWPFParagraph paragraph : doc.getParagraphs()) {
+                doc.setParagraph(templateParagraph, position++);
+            }
+        } catch (IOException e) {
+            logger.error("File " + TEMPLATE + "was not been found!");
+        }
+        return doc;
+    }
+
+    private InputStream writeToInputStream(XWPFDocument document) {
+        InputStream is = null;
+        try {
+            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
+            document.write(byteOutStream);
+            is = new ByteArrayInputStream(byteOutStream.toByteArray());
             document.close();
         } catch (IOException e) {
-            logger.error("Can't to write file!");
+            logger.error("IOException in creating NTEMPLATES module.");
         }
+        return is;
     }
 
     private void addImageRun(XWPFRun imageRun, String urlToImage) {
@@ -129,12 +116,9 @@ public class WordWriter {
                     imageRun.addPicture(is,
                             XWPFDocument.PICTURE_TYPE_JPEG, file.getName(),
                             Units.toEMU(400), Units.toEMU(250));
-
             }
         } catch (IOException | InvalidFormatException e) {
             logger.error("Error with inserting image!");
         }
     }
-
-
 }

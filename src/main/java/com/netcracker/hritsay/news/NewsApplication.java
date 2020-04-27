@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.netcracker.hritsay.news.controllers", "com.netcracker.hritsay.news.services"})
+@ComponentScan(basePackages = {"com.netcracker.hritsay.news.controllers", "com.netcracker.hritsay.news.services", "com.netcracker.hritsay.news.models"})
 public class NewsApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

@@ -1,12 +1,16 @@
 package com.netcracker.hritsay.news.models;
 
-import com.sun.xml.internal.txw2.annotation.XmlElement;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.time.ZonedDateTime;
 
-@Component
-@XmlElement
+@XmlRootElement(name = "article")
+@XmlType(propOrder = {"source", "author", "title", "description", "url", "urlToImage", "date", "content"})
+@JsonPropertyOrder({"source", "author", "title", "description", "url", "urlToImage", "date", "content"})
 public class Article {
     private String source;
     private String author;
@@ -17,6 +21,7 @@ public class Article {
     private ZonedDateTime date;
     private String content;
 
+    public Article() {}
 
     public Article(String source, String author, String title, String description, String url, String urlToImage, ZonedDateTime date, String content) {
         this.source = source;
