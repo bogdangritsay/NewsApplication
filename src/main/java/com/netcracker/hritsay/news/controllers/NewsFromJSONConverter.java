@@ -17,13 +17,14 @@ public class NewsFromJSONConverter implements Converter<String, News> {
     private static final Logger logger = LogManager.getLogger(NewsFromJSONConverter.class);
 
 
+    public NewsFromJSONConverter() {}
+
     @Override
     public  News convert(String responseNews) {
         ArrayList<Article> parsedArticles = new ArrayList<>();
         JSONObject newsJson = new JSONObject(responseNews);
         JSONArray arr = newsJson.getJSONArray("articles");
         for (int i = 0; i < arr.length(); i++) {
-            Object idObj = arr.getJSONObject(i).getJSONObject("source").get("id");
             String name = arr.getJSONObject(i).getJSONObject("source").getString("name");
             String source = name;
             Object authObj = arr.getJSONObject(i).get("author");
@@ -35,8 +36,7 @@ public class NewsFromJSONConverter implements Converter<String, News> {
             Object urlToImageObj = arr.getJSONObject(i).get("urlToImage");
             String urlToImage = (!JSONObject.NULL.equals(urlToImageObj)) ? (String) urlToImageObj : null;
             ZonedDateTime date = ZonedDateTime.parse(arr.getJSONObject(i).getString("publishedAt"));
-            Object contObj = arr.getJSONObject(i).get("content");
-            String content = null;//(!JSONObject.NULL.equals(contObj))? (String) contObj: null;
+            String content = null;
             parsedArticles.add(new Article(source, author, title, description, url, urlToImage, date, content));
         }
         logger.info("JSON was been converted into News data.");

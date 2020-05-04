@@ -6,11 +6,6 @@
       "description": "Description for newsapi.url.ua.ua."
     },
     {
-      "name": "word.path",
-      "type": "java.lang.String",
-      "description": "Description for word.path."
-    },
-    {
       "name": "newsapi.key",
       "type": "java.lang.String",
       "description": "Description for newsapi.key."
@@ -29,5 +24,10 @@
       "name": "request.threads",
       "type": "java.lang.String",
       "description": "Description for request.threads."
+    },
+    {
+      "name": "word.out.filename",
+      "type": "java.lang.String",
+      "description": "Description for word.out.filename."
     }
   ] }

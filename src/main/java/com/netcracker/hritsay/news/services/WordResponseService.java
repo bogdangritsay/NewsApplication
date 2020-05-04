@@ -10,23 +10,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 @Service
 public class WordResponseService {
-    @Value("${word.path}")
-    private String output;
     @Autowired
     NewsFromJSONConverter converter;
     private static final Logger logger = LogManager.getLogger(WordResponseService.class);
     @Autowired
     WordWriter wordWriter;
 
-    public void createWordDocument(News news) {
-        if (news != null) {
-            XWPFDocument doc = wordWriter.createNewsDocFromTemplate(news.getArticles());
-            wordWriter.writeToFile(doc, output);
-            logger.info("Document for response was been created");
-        } else {
-            logger.info("Document for response was not been created because response news is empty!");
+    public byte[] createWordDocument(News news) {
+        byte[] out = null;
+        try {
+            if (news != null) {
+                XWPFDocument doc = wordWriter.createNewsDocFromTemplate(news.getArticles());
+                ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
+                doc.write(byteOutStream);
+                out = byteOutStream.toByteArray();
+                logger.info("Document for response was been created");
+            } else {
+                logger.info("Document for response was not been created because response news is empty!");
+            }
+        } catch (IOException e) {
+            logger.error("Here is IOException.");
         }
+        return out;
     }
 }
