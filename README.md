@@ -5,15 +5,19 @@ Mappings:
 
 ** новини по дефолту - це новини для України з категорією "health"(здоров'я)"
 
-http://localhost:8989/data/json - новини по дефолту в форматі JSON
+http://localhost:8987/news/data.json - новини по дефолту в форматі JSON
 
-http://localhost:8989/data/xml - новини по дефолту в форматі XML
+http://localhost:8987/news/data.xml - новини по дефолту в форматі XML
 
-http://localhost:8989/data/word - новини по дефолту, які зберігаються на пристрій клієнта у форматі .docx
+Також формат можна вказувати з дорпомогою параметра mediaType
+
+http://localhost:8987/news/data?mediaType=xml - новини по дефолту в форматі XML
+
+http://localhost:8987/data/word - новини по дефолту, які зберігаються на пристрій клієнта у форматі .docx
 
 Приклад одночасного отримання новин для декількох країн із різними категоріями: 
 
-http://localhost:8989/data/json?country=ua&category=health&country=us&category=business  - параметри (Україна, здоровя) та (США, бізнес) у форматі JSON
+http://localhost:8987/news/data?country=us&category=health&country=ua&category=business  - параметри (Україна, бізнес) та (США, здоров'я) у форматі JSON
 
 
 
