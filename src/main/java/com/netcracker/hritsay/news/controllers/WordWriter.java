@@ -108,14 +108,13 @@ public class WordWriter {
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
             connection.connect();
             BufferedImage img = ImageIO.read(connection.getInputStream());
-            String pathTmpImage = "\\downloaded.jpg";
-            File file = new File(pathTmpImage);
+            ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
             if (img != null) {
-                ImageIO.write(img, "jpg", file);
-                    InputStream is = new FileInputStream(file);
-                    imageRun.addPicture(is,
-                            XWPFDocument.PICTURE_TYPE_JPEG, file.getName(),
-                            Units.toEMU(400), Units.toEMU(250));
+                ImageIO.write(img, "jpg", imageStream);
+                InputStream is = new ByteArrayInputStream(imageStream.toByteArray());
+                imageRun.addPicture(is,
+                        XWPFDocument.PICTURE_TYPE_JPEG, "image",
+                        Units.toEMU(400), Units.toEMU(250));
             }
         } catch (IOException | InvalidFormatException e) {
             logger.error("Error with inserting image!");
