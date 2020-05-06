@@ -26,7 +26,7 @@ public class ContentResponseController {
     @Autowired
     private NEWSAPINewsService newsapiNewsService;
     @Autowired
-    ConversionService conversionService;
+    private ConversionService conversionService;
     private static final Logger logger = LogManager.getLogger(ContentResponseController.class);
     @Autowired
     private WordResponseService wordResponseService;
@@ -35,9 +35,15 @@ public class ContentResponseController {
     @Value("${request.threads}")
     private int n;
 
+    /**
+     * Returns news in docx format (as a Microsoft Office Word document)
+     * @param queryMap map of response parameters
+     * @return news in docx format
+     *
+     */
 
     @RequestMapping(path = "/word", method = RequestMethod.GET)
-    public ResponseEntity<?> showData(@RequestParam MultiValueMap<String, String> queryMap) {
+    public ResponseEntity<?> getNewsInDocx(@RequestParam MultiValueMap<String, String> queryMap) {
         long before = System.currentTimeMillis();
         News news = handleRequest(queryMap);
         ResponseEntity respEntity = null;
@@ -51,6 +57,11 @@ public class ContentResponseController {
         return respEntity;
     }
 
+    /**
+     * Returns news in json or xml format
+     * @param queryMap map of response parameters
+     * @return news in xml/json format
+     */
 
     @RequestMapping(value = "/data", method = RequestMethod.GET,
                     produces = { "application/json", "application/xml" })

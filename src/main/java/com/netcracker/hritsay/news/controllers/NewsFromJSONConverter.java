@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class NewsFromJSONConverter implements Converter<String, News> {
     private static final Logger logger = LogManager.getLogger(NewsFromJSONConverter.class);
 
-
     public NewsFromJSONConverter() {}
 
     @Override
