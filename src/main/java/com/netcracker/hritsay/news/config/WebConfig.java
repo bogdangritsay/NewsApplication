@@ -1,6 +1,8 @@
 package com.netcracker.hritsay.news.config;
 
+import com.netcracker.hritsay.news.controllers.NewsFromJSONConverter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,5 +21,10 @@ public class WebConfig implements WebMvcConfigurer {
                 defaultContentType(MediaType.APPLICATION_JSON).
                 mediaType("xml", MediaType.APPLICATION_XML).
                 mediaType("json", MediaType.APPLICATION_JSON);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new NewsFromJSONConverter());
     }
 }
