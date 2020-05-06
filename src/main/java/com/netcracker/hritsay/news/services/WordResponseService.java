@@ -16,8 +16,13 @@ import java.io.IOException;
 public class WordResponseService {
     private static final Logger logger = LogManager.getLogger(WordResponseService.class);
     @Autowired
-    WordWriter wordWriter;
+    private WordWriter wordWriter;
 
+    /**
+     * Creates and returns byte array of docx document from specified news
+     * @param news news for document
+     * @return byte array of document
+     */
     public byte[] createWordDocument(News news) {
         byte[] out = null;
         try {

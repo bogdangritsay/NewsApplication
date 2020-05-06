@@ -24,7 +24,12 @@ public class NEWSAPINewsService implements NewsService {
     private String key;
     private static final Logger logger = LogManager.getLogger(NEWSAPINewsService.class);
 
-
+    /**
+     * Returns news in String format from API
+     * @param country country parameter for query
+     * @param category category parameter for query
+     * @return news in String format
+     */
     @Override
     @Cacheable(cacheNames = "newsCache", key="{#country, #category}")
     public String getResponseNews(String country, String category) {
