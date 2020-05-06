@@ -7,17 +7,15 @@ import com.netcracker.hritsay.news.services.NEWSAPINewsService;
 import com.netcracker.hritsay.news.services.WordResponseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -28,7 +26,7 @@ public class ContentResponseController {
     @Autowired
     private NEWSAPINewsService newsapiNewsService;
     @Autowired
-    private NewsFromJSONConverter converter;
+    ConversionService conversionService;
     private static final Logger logger = LogManager.getLogger(ContentResponseController.class);
     @Autowired
     private WordResponseService wordResponseService;
@@ -117,7 +115,7 @@ public class ContentResponseController {
     }
 
     private News getNewNews(String response, News news) {
-        News tmpNews = converter.convert(response);
+        News tmpNews = conversionService.convert(response, News.class);
         if (news.getArticles() == null) {
             news = tmpNews;
         } else {
