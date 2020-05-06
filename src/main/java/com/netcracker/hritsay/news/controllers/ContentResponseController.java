@@ -101,16 +101,18 @@ public class ContentResponseController {
                     return nNews;
                 }
             });
+
+            try {
+                news = future.get();
+            } catch (InterruptedException e) {
+                logger.error("Thread was been interrupted!");
+            } catch (ExecutionException e) {
+                logger.error("There is execution!");
+            }
+
             i++;
         }
         service.shutdown();
-        try {
-            news = future.get();
-        } catch (InterruptedException e) {
-            logger.error("Thread was been interrupted!");
-        } catch (ExecutionException e) {
-            logger.error("There is execution!");
-        }
         return news;
     }
 
